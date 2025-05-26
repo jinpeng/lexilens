@@ -1,11 +1,16 @@
 import re
 import logging
+import os
+from dotenv import load_dotenv
 
-# Set up logging
+# Load environment variables from .env file
+load_dotenv()
+
+# Set up logging using environment variables
 logging.basicConfig(
-    filename='debug.log',
-    level=logging.DEBUG,
-    format='%(message)s'
+    filename=os.getenv('LOG_FILE'),
+    level=getattr(logging, os.getenv('LOG_LEVEL', 'INFO')),
+    format=os.getenv('LOG_FORMAT')
 )
 
 
